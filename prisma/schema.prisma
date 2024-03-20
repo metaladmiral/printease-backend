@@ -17,6 +17,7 @@ datasource printease-backend {
 model User {
   id        Int      @id @default(autoincrement())
   user_id   String   @unique
+  username  String
   pass      String
   email     String   @unique
   phone     String
