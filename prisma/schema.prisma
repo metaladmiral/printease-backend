@@ -8,7 +8,43 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource printease-backend {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id        Int      @id @default(autoincrement())
+  user_id   String   @unique
+  pass      String
+  email     String   @unique
+  user_type String
+  createdAt DateTime @default(now())
+  Order     Order[]
+}
+
+// Orders model
+model Order {
+  id            Int         @id @default(autoincrement())
+  order_id      String      @unique
+  user_id       String
+  order_title   String
+  status        String
+  total_price   Float
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  User          User        @relation(fields: [user_id], references: [user_id])
+  OrderDetails  OrderDetail @relation(fields: [order_id], references: [order_id])
+}
+
+// OrderDetails model
+model OrderDetail {
+  order_id     String   @unique
+  file_details String
+  page_size    String
+  color        String
+  print_type   String
+  pages        Int
+  Order        Order[]
 }
