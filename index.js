@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 app.post('/login', (req, res) => {
-  login(req, res, process.env.TOKEN_SECRET)
+  login(req, res, process.env.JWT_TOKEN_SECRET)
 })
 
 app.listen(port, () => {
