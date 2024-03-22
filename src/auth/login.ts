@@ -1,26 +1,41 @@
 import { Request, Response } from "express";
-// import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import jwt, { Secret } from 'jsonwebtoken';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 async function chkCredsFromDb() {
     
 }
 
-function login(req: Request, res: Response, TOKEN_SECRET:String) {
-    const {username, pass} = req.body
+async function login(req: Request, res: Response, TOKEN_SECRET:Secret) {
+    const {email, pass} = req.body
 
-    if(!username || !pass) {
+    if(!email || !pass) {
         res.status(404).json({})
         return
     }    
-    res.send(username+" "+pass)
-    
+    const hashedPass = crypto.createHash('sha256').update(pass).digest('hex');
 
-    // function generateAccessToken(userData) {
-    //     return jwt.sign(userData, TOKEN_SECRET, { expiresIn: '2629800s' });
-    // }
-    // let jwtToken = generateAccessToken()
-    // res.send(`JWT TOKEN: ${jwtToken}`)
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email,
+            pass: hashedPass,
+        },
+    })
+
+    if(!user) {
+        res.send({"user_found": "0"})
+        return
+    }
     
+    function generateAccessToken(userData: Object) {
+        return jwt.sign(userData, TOKEN_SECRET, { expiresIn: '2629800s' });
+    }
+    let jwtToken = generateAccessToken(user)
+    res.send({"user_found": "1", "JWT_TOKEN": jwtToken})
+
 }
 
 export default login
