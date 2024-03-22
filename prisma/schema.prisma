@@ -43,10 +43,10 @@ model Order {
 // OrderDetails model
 model OrderDetail {
   order_id     String   @unique
-  file_details String
+  file_details Json
   page_size    String
-  color        String
+  print_color        String
   print_type   String
-  pages        Int
+  total_pages        Int
   Order        Order[]
 }
