@@ -24,7 +24,7 @@ async function login(req: Request, res: Response, TOKEN_SECRET:Secret) {
     }    
     const hashedPass = crypto.createHash('sha256').update(pass).digest('hex');
 
-    const user = chkCredsFromDb(email, hashedPass)
+    const user = await chkCredsFromDb(email, hashedPass)
 
     if(!user) {
         res.send({"user_found": "0"})
