@@ -5,8 +5,14 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
-async function chkCredsFromDb() {
-    
+async function chkCredsFromDb(email:String, hashedPass:String) {
+    let user = await prisma.user.findUnique({
+        where: {
+            email: email,
+            pass: hashedPass,
+        },
+    })
+    return user
 }
 
 async function login(req: Request, res: Response, TOKEN_SECRET:Secret) {
@@ -18,12 +24,7 @@ async function login(req: Request, res: Response, TOKEN_SECRET:Secret) {
     }    
     const hashedPass = crypto.createHash('sha256').update(pass).digest('hex');
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: email,
-            pass: hashedPass,
-        },
-    })
+    const user = chkCredsFromDb(email, hashedPass)
 
     if(!user) {
         res.send({"user_found": "0"})
