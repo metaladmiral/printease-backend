@@ -16,12 +16,14 @@ async function getMyOrders(req: RequestWithUser, res: Response) {
 
     let orders = await prisma.order.findMany({
         where: {
-            user_id: user_id
+            user_id: user_id,
         },
+        orderBy: {
+            status: "asc"
+        }
     })
 
     res.send(orders)
-    console.log(orders)
 
 }
 
