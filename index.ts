@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
-import {login, register, createOrder, getMyOrders} from "./src/controller"
+import {login, register, createOrder, getMyOrders, getOrderDetails} from "./src/controller"
 import {jwtMiddleware, uploadMiddleware} from "./src/middleware/middlewares"
 // import upload from './src/middleware/fileMiddleware';
 
@@ -30,6 +30,10 @@ app.post('/order/create-order', uploadMiddleware.single('file'), (req: Request, 
 
 app.get('/order/my-orders', (req: Request, res: Response) => {
   getMyOrders(req, res)
+})
+
+app.get('/order/get-order-details', (req: Request, res: Response) => {
+  getOrderDetails(req, res)
 })
 
 const port = 3000
