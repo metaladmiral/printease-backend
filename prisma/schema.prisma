@@ -38,6 +38,8 @@ model Order {
   updatedAt     DateTime    @updatedAt
   User          User        @relation(fields: [user_id], references: [user_id])
   OrderDetails  OrderDetail[]
+
+  @@index([status])
 }
 
 // OrderDetails model

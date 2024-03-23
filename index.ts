@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
-import {login, register, createOrder, getMyOrders, getOrderDetails} from "./src/controller"
-import {jwtMiddleware, uploadMiddleware} from "./src/middleware/middlewares"
+import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders} from "./src/controller"
+import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./src/middleware/middlewares"
 // import upload from './src/middleware/fileMiddleware';
 
 enva.config();
@@ -12,6 +12,7 @@ app.use(express.urlencoded({
 }))   
 
 app.use('/order', jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token"))
+app.use('/owner', ownerMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token"))
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
@@ -34,6 +35,10 @@ app.get('/order/my-orders', (req: Request, res: Response) => {
 
 app.get('/order/get-order-details', (req: Request, res: Response) => {
   getOrderDetails(req, res)
+})
+
+app.get('/owner/get-pending-orders', (req: Request, res: Response) => {
+  getPendingOrders(req, res)
 })
 
 const port = 3000
