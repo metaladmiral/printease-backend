@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
-import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders} from "./src/controller"
+import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders} from "./src/controller"
 import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./src/middleware/middlewares"
 // import upload from './src/middleware/fileMiddleware';
 
@@ -42,6 +42,14 @@ app.get('/user/get-order-details', (req: Request, res: Response) => {
 app.get('/owner/get-pending-orders', (req: Request, res: Response) => {
   getPendingOrders(req, res)
 })
+app.post('/owner/get-all-orders', (req: Request, res: Response) => {
+  getAllOrders(req, res)
+})
+app.post('/owner/update-order-status', (req: Request, res: Response) => {
+  updateOrderStatus(req, res)
+})
+
+
 
 const port = 3000
 app.listen(port, () => {
