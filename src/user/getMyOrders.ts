@@ -12,7 +12,7 @@ async function getMyOrders(req: RequestWithUser, res: Response) {
         return;
     }
 
-    let user_id: String = req.user.user_id;
+    let user_id: string = req.user.user_id;
 
     let orders = await prisma.order.findMany({
         where: {

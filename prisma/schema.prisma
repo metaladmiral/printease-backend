@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource printease-backend {
+datasource printease {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }

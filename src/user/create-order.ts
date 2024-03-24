@@ -22,7 +22,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     
     let order_id = crypto.randomBytes(20).toString('hex')
     let user: JwtPayload | undefined;
-    let user_id: String;
+    let user_id: string;
 
     user = req.user
     user_id = user.user_id

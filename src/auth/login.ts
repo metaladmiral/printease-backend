@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
-async function chkCredsFromDb(email:String, hashedPass:String) {
+async function chkCredsFromDb(email:string, hashedPass:string) {
     let user = await prisma.user.findUnique({
         where: {
             email: email,

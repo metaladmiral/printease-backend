@@ -11,7 +11,9 @@ async function getOrderDetails(req: RequestWithUser, res: Response) {
         return;
     }
 
-    let {order_id} = req.query
+    let order_id = req.query.order_id
+
+    order_id = order_id?.toString()
 
     let orderDetails = await prisma.order.findUnique({
         where: {
