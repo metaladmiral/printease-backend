@@ -14,16 +14,21 @@ async function getMyOrders(req: RequestWithUser, res: Response) {
 
     let user_id: string = req.user.user_id;
 
-    let orders = await prisma.order.findMany({
-        where: {
-            user_id: user_id,
-        },
-        orderBy: {
-            status: "asc"
-        }
-    })
-
-    res.send(orders)
+    try {
+        let orders = await prisma.order.findMany({
+            where: {
+                user_id: user_id,
+            },
+            orderBy: {
+                status: "asc"
+            }
+        })
+    
+        res.send(orders)
+    }
+    catch(err) {
+        res.send("DB ERROR")
+    }
 
 }
 

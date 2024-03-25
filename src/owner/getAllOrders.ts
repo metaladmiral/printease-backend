@@ -18,15 +18,21 @@ async function getAllOrders(req: RequestWithUser, res: Response) {
         return;
     }
 
-    let orderDetails = await prisma.order.findMany({
-        take: limit,
-        skip: offset,
-        orderBy: {
-            updatedAt: 'desc'
-        }
-    })
+    try {
 
-    res.send(orderDetails)
+        let orderDetails = await prisma.order.findMany({
+            take: limit,
+            skip: offset,
+            orderBy: {
+                updatedAt: 'desc'
+            }
+        })
+        res.send(orderDetails)
+
+    }catch(err) {
+        res.send("DB ERROR")
+    }
+
 
 }
 

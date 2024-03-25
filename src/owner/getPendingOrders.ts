@@ -11,13 +11,18 @@ async function getPendingOrders(req: RequestWithUser, res: Response) {
         return;
     }
 
-    let orderDetails = await prisma.order.findMany({
-        where: {
-            status: 0
-        }
-    })
+    try {
 
-    res.send(orderDetails)
+        let orderDetails = await prisma.order.findMany({
+            where: {
+                status: 0
+            }
+        })
+    
+        res.send(orderDetails)
+    }catch(err) {
+        res.send("DB Error")
+    }
 
 }
 

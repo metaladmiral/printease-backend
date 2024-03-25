@@ -20,16 +20,21 @@ async function updateOrderStatus(req: RequestWithUser, res: Response) {
         return
     }
 
-    await prisma.order.update({
-        where: {
-            order_id: order_id
-        },
-        data: {
-            status: parsedOrderStatus
-        }
-    })
+    try {
+        await prisma.order.update({
+            where: {
+                order_id: order_id
+            },
+            data: {
+                status: parsedOrderStatus
+            }
+        })
+        res.send({"success": true, "msg": "Updated Status of the order."})
+    }
+    catch(err) {
+        res.send("DB Error")
+    }
 
-    return res.send({"success": true, "msg": "Updated Status of the order."})
 
 }
 
