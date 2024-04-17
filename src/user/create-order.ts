@@ -41,7 +41,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
                 updatedAt: new Date()
             },
         });
-        let order_details = await prisma.orderdetail.create({
+        let order_details = await prisma.orderDetail.create({
             data: {
                 order_id: order_id,
                 file_details: `["${filename}"]`,
