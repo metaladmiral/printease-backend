@@ -5,7 +5,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "vercel-build": "echo hello"
   },
   "dependencies": {
     "@prisma/client": "^5.11.0",
