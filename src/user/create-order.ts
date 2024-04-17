@@ -37,10 +37,11 @@ async function createOrder(req: RequestWithUser, res: Response) {
                 user_id: user_id,
                 order_title: title,
                 status: 0,
-                total_price: totalPriceFloat
+                total_price: totalPriceFloat,
+                updatedAt: new Date()
             },
         });
-        let order_details = await prisma.orderDetail.create({
+        let order_details = await prisma.orderdetail.create({
             data: {
                 order_id: order_id,
                 file_details: `["${filename}"]`,

@@ -22,7 +22,7 @@ async function getOrderDetails(req: RequestWithUser, res: Response) {
                 order_id: order_id
             },
             include: {
-                OrderDetails: {
+                orderdetail: {
                     select: {
                         file_details: true,
                         page_size: true,

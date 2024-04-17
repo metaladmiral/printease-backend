@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource printease {
+datasource defaultdb {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }

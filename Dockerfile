@@ -25,7 +25,7 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-RUN echo "172.17.0.1    host.docker.internal" | tee -a /etc/hosts
+# RUN echo "172.17.0.1    host.docker.internal" | tee -a /etc/hosts
 
 # Build TypeScript
 RUN npm run build
