@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
-import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders} from "./src/controller"
-import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./src/middleware/middlewares"
-// import upload from './src/middleware/fileMiddleware';
+import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders} from "./controller"
+import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./middleware/middlewares"
+// import upload from './middleware/fileMiddleware';
 
 enva.config();
 
