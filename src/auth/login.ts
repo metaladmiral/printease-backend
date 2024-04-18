@@ -29,7 +29,7 @@ async function login(req: Request, res: Response, TOKEN_SECRET:Secret) {
         user = await chkCredsFromDb(email, hashedPass)
     }
     catch(err) {
-        res.send("DB error")
+        res.send("DB error: "+err)
         return
     }
 
