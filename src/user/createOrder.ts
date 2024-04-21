@@ -32,26 +32,26 @@ async function createOrder(req: RequestWithUser, res: Response) {
     let totalPagesInt = parseInt(totalPages)
 
     try {
-        // let order = await prisma.order.create({
-        //     data: {
-        //         order_id: order_id,
-        //         user_id: user_id,
-        //         order_title: title,
-        //         status: 0,
-        //         total_price: totalPriceFloat,
-        //         updatedAt: new Date()
-        //     },
-        // });
-        // let order_details = await prisma.orderDetail.create({
-        //     data: {
-        //         order_id: order_id,
-        //         file_details: `["${filename}"]`,
-        //         page_size: pageSize,
-        //         print_color: color,
-        //         print_type: printType,
-        //         total_pages: totalPagesInt
-        //     },
-        // });
+        let order = await prisma.order.create({
+            data: {
+                order_id: order_id,
+                user_id: user_id,
+                order_title: title,
+                status: 0,
+                total_price: totalPriceFloat,
+                updatedAt: new Date()
+            },
+        });
+        let order_details = await prisma.orderDetail.create({
+            data: {
+                order_id: order_id,
+                file_details: `["${filename}"]`,
+                page_size: pageSize,
+                print_color: color,
+                print_type: printType,
+                total_pages: totalPagesInt
+            },
+        });
 
         await EmailService.sendEmail(
             req.user.email,
