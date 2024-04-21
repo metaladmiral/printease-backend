@@ -53,17 +53,6 @@ async function createOrder(req: RequestWithUser, res: Response) {
             },
         });
 
-        await EmailService.sendEmail(
-            req.user.email,
-            filename,
-            "",
-            pageSize,
-            color,
-            printType,
-            5,
-            totalPages
-          ); 
-
         res.json({"success": "true"})
 
     }
