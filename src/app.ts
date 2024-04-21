@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
 import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders} from "./controller"
 import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./middleware/middlewares"
-// import upload from './middleware/fileMiddleware';
+
 
 enva.config();
 
@@ -25,8 +25,9 @@ app.post('/register', (req: Request, res: Response) => {
 })
 
 /* User APIs */
-app.post('/user/create-order', uploadMiddleware.single('file'), (req: Request, res: Response) => {
-  createOrder(req, res)
+
+app.post('/user/create-order', uploadMiddleware(), (req: Request, res: Response) => {
+  createOrder(req, res) 
 })
 
 app.get('/user/my-orders', (req: Request, res: Response) => {

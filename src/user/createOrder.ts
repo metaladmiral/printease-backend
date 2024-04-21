@@ -12,7 +12,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
         totalprice:totalPrice,
          pagesize: pageSize, color, printtype: printType, totalpages: totalPages} = req.body
     
-    if(!pageSize || !color || !printType || !totalPages) { res.send({"success": "false", "msg":"some required fields are missing"}); return; }
+    if(!pageSize || !color || !printType || !totalPages) { return res.send({"success": "false", "msg":"some required fields are missing"}) }
     if(!totalPrice) { res.send({"success": "false", "msg":"price is zero"}); return; }
     
     if(req.user===undefined) {
@@ -25,8 +25,8 @@ async function createOrder(req: RequestWithUser, res: Response) {
     let user_id: string;
 
     user = req.user
-    user_id = user.user_id
-    let filename = req.file?.filename
+    user_id = user?.user_id
+    let filename = req.body.file
     let totalPriceFloat = parseFloat(totalPrice)
     let totalPagesInt = parseInt(totalPages)
 
@@ -57,7 +57,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     }
     catch(err) {
         console.log(err)
-        res.status(500).send("DB error")
+        res.status(500).send({"success": "false", "msg": `DB Error`})
         return
     }
 
