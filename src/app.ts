@@ -85,7 +85,7 @@ app.get("/get-per-page-price", (req: Request, res: Response) => {
 app.get("/get-order-details", (req: Request, res: Response) => {
   getOrderDetails(req, res);
 });
-app.get("/get-user-details", (req: Request, res: Response) => {
+app.get("/get-user-details/{user_id}", (req: Request, res: Response) => {
   getUserDetails(req, res);
 });
 
