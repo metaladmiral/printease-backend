@@ -11,9 +11,9 @@ async function createOrder(req: RequestWithUser, res: Response) {
 
     const {title, 
         totalprice:totalPrice,
-         pagesize: pageSize, color, printtype: printType, totalpages: totalPages} = req.body
+         pagesize: pageSize, color, printtype: printType, totalpages: totalPages, paymentid: paymentId} = req.body
     
-    if(!pageSize || !color || !printType || !totalPages) { return res.send({"success": "false", "msg":"some required fields are missing"}) }
+    if(!pageSize || !color || !printType || !totalPages || !paymentId) { return res.send({"success": "false", "msg":"some required fields are missing"}) }
     if(!totalPrice) { res.send({"success": "false", "msg":"price is zero"}); return; }
     
     if(req.user===undefined) {
@@ -37,6 +37,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
                 order_id: order_id,
                 user_id: user_id,
                 order_title: title,
+                payment_id: paymentId,
                 status: 0,
                 total_price: totalPriceFloat,
                 updatedAt: new Date()
