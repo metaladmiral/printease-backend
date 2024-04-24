@@ -34,6 +34,7 @@ app.use(
 );
 app.use(
   "/owner",
+  jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token"),
   ownerMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
 );
 
@@ -77,7 +78,7 @@ app.post("/send-create-order-mail", (req: Request, res: Response) => {
   sendEmail(req, res);
 });
 
-/* Common EPs */
+/* Common APis */
 
 app.get("/get-per-page-price", (req: Request, res: Response) => {
   getPerPagePrice(req, res);
@@ -85,7 +86,7 @@ app.get("/get-per-page-price", (req: Request, res: Response) => {
 app.get("/get-order-details", (req: Request, res: Response) => {
   getOrderDetails(req, res);
 });
-app.get("/get-user-details/{user_id}", (req: Request, res: Response) => {
+app.get("/get-user-details", (req: Request, res: Response) => {
   getUserDetails(req, res);
 });
 
