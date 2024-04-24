@@ -76,9 +76,6 @@ app.post("/owner/update-order-status", (req: Request, res: Response) => {
 app.post("/send-create-order-mail", (req: Request, res: Response) => {
   sendEmail(req, res);
 });
-app.get("/user/get-user-details", (req: Request, res: Response) => {
-  getUserDetails(req, res);
-});
 app.get("/get-per-page-price", (req: Request, res: Response) => {
   getPerPagePrice(req, res);
 });
@@ -87,6 +84,9 @@ app.get("/get-per-page-price", (req: Request, res: Response) => {
 
 app.get("/get-order-details", (req: Request, res: Response) => {
   getOrderDetails(req, res);
+});
+app.get("/get-user-details", (req: Request, res: Response) => {
+  getUserDetails(req, res);
 });
 
 export default app;
