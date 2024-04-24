@@ -33,6 +33,10 @@ app.use(
   jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
 );
 app.use(
+  "/common",
+  jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
+);
+app.use(
   "/owner",
   jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token"),
   ownerMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
@@ -73,20 +77,19 @@ app.post("/owner/update-order-status", (req: Request, res: Response) => {
   updateOrderStatus(req, res);
 });
 
-/* Superadmin APiS */
+/* Public APiS (Not requires JWT) */
 app.post("/send-create-order-mail", (req: Request, res: Response) => {
   sendEmail(req, res);
 });
-
-/* Common APis */
-
 app.get("/get-per-page-price", (req: Request, res: Response) => {
   getPerPagePrice(req, res);
 });
 app.get("/get-order-details", (req: Request, res: Response) => {
   getOrderDetails(req, res);
 });
-app.get("/get-user-details", (req: Request, res: Response) => {
+
+/* Common APis (Requires JWT for either owner or user) */
+app.get("/common/get-user-details", (req: Request, res: Response) => {
   getUserDetails(req, res);
 });
 
