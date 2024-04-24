@@ -31,7 +31,7 @@ if(process.env.BLOB_READ_WRITE_TOKEN === undefined) {
   
       upload.single('file')(req, res, function(err) {
         if(err) {
-          return  res.status(500).send("err")
+          return  res.status(500).send("err in uploading file ")
         }
         const file = req.file
         if(!file) { return res.status(500).json({"success": "false", "msg": "File Not Uploaded!"}) }
@@ -55,7 +55,7 @@ else {
     return async function(req: Request, res: Response, next: NextFunction) {
       upload.single('file')(req, res, async function(err: any) {
         if(err) {
-          return  res.status(500).send("err")
+          return  res.status(500).send("err in uploading file ")
         }
         
         const file = req.file
