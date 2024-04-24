@@ -52,5 +52,6 @@ model OrderDetail {
   print_color        String
   print_type   String
   total_pages        Int
+  price_per_page Float?
   order        Order     @relation(fields: [order_id], references: [order_id]) // Define relation to Order
 }

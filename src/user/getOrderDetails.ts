@@ -28,7 +28,8 @@ async function getOrderDetails(req: RequestWithUser, res: Response) {
                         page_size: true,
                         print_color: true,
                         print_type: true,
-                        total_pages: true
+                        total_pages: true,
+                        price_per_page: true
                     }
                 }
             }

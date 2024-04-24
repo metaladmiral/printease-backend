@@ -2,7 +2,7 @@ import { Response } from "express";
 import { PrismaClient } from '@prisma/client';
 import { RequestWithUser } from "../types";
 import { JwtPayload } from "jsonwebtoken";
-import EmailService  from "../mail/emailService"
+
 var crypto = require("crypto");
 
 const prisma = new PrismaClient()
@@ -11,9 +11,9 @@ async function createOrder(req: RequestWithUser, res: Response) {
 
     const {title, 
         totalprice:totalPrice,
-         pagesize: pageSize, color, printtype: printType, totalpages: totalPages, paymentid: paymentId} = req.body
+         pagesize: pageSize, color, printtype: printType, totalpages: totalPages, paymentid: paymentId, priceperpage: pricePerPage} = req.body
     
-    if(!pageSize || !color || !printType || !totalPages || !paymentId) { return res.send({"success": "false", "msg":"some required fields are missing"}) }
+    if(!pageSize || !color || !printType || !totalPages || !paymentId || !pricePerPage) { return res.send({"success": "false", "msg":"some required fields are missing"}) }
     if(!totalPrice) { res.send({"success": "false", "msg":"price is zero"}); return; }
     
     if(req.user===undefined) {
@@ -50,7 +50,8 @@ async function createOrder(req: RequestWithUser, res: Response) {
                 page_size: pageSize,
                 print_color: color,
                 print_type: printType,
-                total_pages: totalPagesInt
+                total_pages: totalPagesInt,
+                price_per_page: parseFloat(pricePerPage)
             },
         });
 
