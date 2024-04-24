@@ -5,9 +5,8 @@ import { RequestWithUser } from "../types";
 const prisma = new PrismaClient();
 
 async function getOrderDetails(req: RequestWithUser, res: Response) {
-  if (req.user === undefined) {
-    res.status(403).send("Access Forbidden");
-    return;
+  if (req.query.order_id === undefined) {
+    return res.status(400).send("OrderID request in Query Params");
   }
 
   let order_id = req.query.order_id;

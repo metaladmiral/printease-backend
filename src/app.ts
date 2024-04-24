@@ -61,10 +61,6 @@ app.get("/user/my-orders", (req: Request, res: Response) => {
   getMyOrders(req, res);
 });
 
-app.get("/user/get-order-details", (req: Request, res: Response) => {
-  getOrderDetails(req, res);
-});
-
 /* Owner APIs */
 app.get("/owner/get-pending-orders", (req: Request, res: Response) => {
   getPendingOrders(req, res);
@@ -85,6 +81,12 @@ app.get("/user/get-user-details", (req: Request, res: Response) => {
 });
 app.get("/get-per-page-price", (req: Request, res: Response) => {
   getPerPagePrice(req, res);
+});
+
+/* Common EPs */
+
+app.get("/get-order-details", (req: Request, res: Response) => {
+  getOrderDetails(req, res);
 });
 
 export default app;
