@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import enva from 'dotenv';
-import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders} from "./controller"
+import {login, register, createOrder, getMyOrders, getOrderDetails, getPendingOrders, updateOrderStatus, getAllOrders, getUserDetails} from "./controller"
 import {jwtMiddleware, uploadMiddleware, ownerMiddleware} from "./middleware/middlewares"
 
 
@@ -47,6 +47,15 @@ app.post('/owner/get-all-orders', (req: Request, res: Response) => {
   getAllOrders(req, res)
 })
 app.post('/owner/update-order-status', (req: Request, res: Response) => {
+  updateOrderStatus(req, res)
+})
+
+
+/* Superadmin APiS */ 
+app.get('/user/get-user-details', (req: Request, res: Response) => {
+  getUserDetails(req, res)
+})
+app.get('/get-per-page-price', (req: Request, res: Response) => {
   updateOrderStatus(req, res)
 })
 
