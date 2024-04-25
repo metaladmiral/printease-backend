@@ -14,7 +14,6 @@ const EmailService = {
       const info = await transporter.sendMail(mailOptions);
       return 1;
     } catch (err) {
-      console.log(err);
       return 0;
     }
   },

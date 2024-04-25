@@ -5,7 +5,6 @@ import { Response } from "express";
 async function sendEmail(req: RequestWithUser, res: Response) {
   if (
     !req.body.email ||
-    !req.body.filelink ||
     !req.body.pagesize ||
     !req.body.color ||
     !req.body.printtype ||
@@ -17,6 +16,15 @@ async function sendEmail(req: RequestWithUser, res: Response) {
   }
 
   try {
+    const attachments: Object[] = [];
+    if (req.body.filelink && req.body.filelink.length > 0) {
+      attachments.push({
+        filelink: "",
+        path: req.body.filelink,
+        contentType: "application/pdf",
+      });
+    }
+
     const mailOptions = {
       from: "myprakhar96@gmail.com",
       to: req.body.email,
@@ -49,16 +57,16 @@ async function sendEmail(req: RequestWithUser, res: Response) {
                   </ul>
                 </div>
               </div>`,
-      attachments: [
-        {
-          filelink: "",
-          path: req.body.filelink,
-          contentType: "application/pdf",
-        },
-      ],
+      attachments: attachments,
     };
 
-    const info = await EmailService.sendEmail(mailOptions);
+    const emailServiceCallResp = await EmailService.sendEmail(mailOptions);
+    if (emailServiceCallResp === 0) {
+      return res.json({
+        success: false,
+        msg: "filelink must be a valid link!",
+      });
+    }
     return res.json({ success: true });
   } catch (err) {
     return res.json({ success: false });
