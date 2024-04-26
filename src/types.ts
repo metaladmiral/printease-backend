@@ -1,7 +1,35 @@
-import { Request } from 'express';
-import { JwtPayload } from 'jsonwebtoken';
+import { Request } from "express";
+import { JwtPayload } from "jsonwebtoken";
 
 /** Custom interface extending Express's Request interface to include user information */
 export interface RequestWithUser extends Request {
-    user?: JwtPayload; // Define the user property as optional
+  user?: JwtPayload; // Define the user property as optional
+}
+
+export interface Order {
+  orderId: string;
+  userId: string;
+  title: string;
+  paymentId: string;
+  totalPriceFloat: number;
+  status?: number;
+}
+
+export interface OrderDetail {
+  orderId: string;
+  fileDetails: string;
+  pageSize: string;
+  printColor: string;
+  printType: string;
+  totalPages: number;
+  pricePerPage: number;
+}
+
+export interface OrderDbWhereObj {
+  user_id?: string;
+  status?: number;
+}
+export interface OrderDbOrderByObj {
+  status?: "asc" | "desc";
+  updatedAt?: "asc" | "desc";
 }

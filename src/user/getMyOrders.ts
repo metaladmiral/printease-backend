@@ -1,35 +1,22 @@
 import { Response } from "express";
-import { PrismaClient } from '@prisma/client';
-import { RequestWithUser } from "../types";
-import { JwtPayload } from "jsonwebtoken";
-
-const prisma = new PrismaClient()
+import { OrderDbWhereObj, RequestWithUser } from "../types";
+import OrderDbService from "../prisma/orderDbService";
 
 async function getMyOrders(req: RequestWithUser, res: Response) {
+  if (req.user === undefined) {
+    res.status(403).send("Access Forbidden");
+    return;
+  }
 
-    if(req.user===undefined) {
-        res.status(403).send("Access Forbidden")
-        return;
-    }
+  let userId: string = req.user.user_id;
 
-    let user_id: string = req.user.user_id;
-
-    try {
-        let orders = await prisma.order.findMany({
-            where: {
-                user_id: user_id,
-            },
-            orderBy: {
-                status: "asc"
-            }
-        })
-    
-        res.send(orders)
-    }
-    catch(err) {
-        res.send("DB ERROR")
-    }
-
+  try {
+    const whereObj: OrderDbWhereObj = { user_id: userId };
+    const orders = await OrderDbService.getOrders(whereObj, { status: "asc" });
+    return res.send(orders);
+  } catch (err) {
+    return res.send("DB ERROR");
+  }
 }
 
-export default getMyOrders
+export default getMyOrders;

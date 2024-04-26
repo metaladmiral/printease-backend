@@ -1,35 +1,21 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import jwt, { Secret } from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-async function chkCredsFromDb(email: string, hashedPass: string) {
-  let user = await prisma.user.findUnique({
-    where: {
-      email: email,
-      pass: hashedPass,
-    },
-  });
-  return user;
-}
+import UserDbService from "../prisma/userDbService";
 
 async function login(req: Request, res: Response, TOKEN_SECRET: Secret) {
   const { email, pass } = req.body;
 
   if (!email || !pass) {
-    res.status(404).json({});
-    return;
+    return res.status(400);
   }
   const hashedPass = crypto.createHash("sha256").update(pass).digest("hex");
 
   let user;
   try {
-    user = await chkCredsFromDb(email, hashedPass);
+    user = await UserDbService.validateUser(email, hashedPass);
   } catch (err) {
-    res.send("DB error: " + err);
-    return;
+    return res.status(500).send("DB error: " + err);
   }
 
   if (!user) {

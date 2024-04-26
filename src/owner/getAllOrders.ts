@@ -1,8 +1,6 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
-import { RequestWithUser } from "../types";
-
-const prisma = new PrismaClient();
+import { OrderDbOrderByObj, RequestWithUser } from "../types";
+import OrderDbService from "../prisma/orderDbService";
 
 async function getAllOrders(req: RequestWithUser, res: Response) {
   if (req.user === undefined) {
@@ -10,20 +8,20 @@ async function getAllOrders(req: RequestWithUser, res: Response) {
     return;
   }
 
-  let limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
-  let offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
+  const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
+  const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
   try {
-    let orderDetails = await prisma.order.findMany({
-      take: limit,
-      skip: offset,
-      orderBy: {
-        updatedAt: "desc",
-      },
-    });
-    res.send(orderDetails);
+    const orderByObj: OrderDbOrderByObj = { updatedAt: "desc" };
+    const orderDetails = await OrderDbService.getOrders(
+      undefined,
+      orderByObj,
+      limit,
+      offset
+    );
+    return res.send(orderDetails);
   } catch (err) {
-    res.send("DB ERROR");
+    return res.send("DB ERROR");
   }
 }
 
