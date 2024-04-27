@@ -6,7 +6,7 @@ import {
   createOrder,
   getMyOrders,
   getOrderDetails,
-  getPendingOrders,
+  getOrdersByStatus,
   updateOrderStatus,
   getAllOrders,
   getUserDetails,
@@ -18,8 +18,6 @@ import {
   uploadMiddleware,
   ownerMiddleware,
 } from "./middleware/middlewares";
-import getPreparedOrders from "./owner/getPreparedOrders";
-import getPickedOrders from "./owner/getPickedOrders";
 
 enva.config();
 
@@ -70,13 +68,13 @@ app.get("/user/my-orders", (req: Request, res: Response) => {
 
 /* Owner APIs */
 app.get("/owner/get-pending-orders", (req: Request, res: Response) => {
-  getPendingOrders(req, res);
+  getOrdersByStatus(req, res, "ORDER_PENDING");
 });
 app.get("/owner/get-prepared-orders", (req: Request, res: Response) => {
-  getPreparedOrders(req, res);
+  getOrdersByStatus(req, res, "ORDER_PREPARED");
 });
 app.get("/owner/get-picked-orders", (req: Request, res: Response) => {
-  getPickedOrders(req, res);
+  getOrdersByStatus(req, res, "ORDER_PICKED");
 });
 app.post("/owner/get-all-orders", (req: Request, res: Response) => {
   getAllOrders(req, res);
