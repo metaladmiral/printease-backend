@@ -18,6 +18,8 @@ import {
   uploadMiddleware,
   ownerMiddleware,
 } from "./middleware/middlewares";
+import getPreparedOrders from "./owner/getPreparedOrders";
+import getPickedOrders from "./owner/getPickedOrders";
 
 enva.config();
 
@@ -69,6 +71,12 @@ app.get("/user/my-orders", (req: Request, res: Response) => {
 /* Owner APIs */
 app.get("/owner/get-pending-orders", (req: Request, res: Response) => {
   getPendingOrders(req, res);
+});
+app.get("/owner/get-prepared-orders", (req: Request, res: Response) => {
+  getPreparedOrders(req, res);
+});
+app.get("/owner/get-picked-orders", (req: Request, res: Response) => {
+  getPickedOrders(req, res);
 });
 app.post("/owner/get-all-orders", (req: Request, res: Response) => {
   getAllOrders(req, res);
