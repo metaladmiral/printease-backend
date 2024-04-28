@@ -67,13 +67,13 @@ app.get("/user/my-orders", (req: Request, res: Response) => {
 });
 
 /* Owner APIs */
-app.get("/owner/get-pending-orders", (req: Request, res: Response) => {
+app.post("/owner/get-pending-orders", (req: Request, res: Response) => {
   getOrdersByStatus(req, res, "ORDER_PENDING");
 });
-app.get("/owner/get-prepared-orders", (req: Request, res: Response) => {
+app.post("/owner/get-prepared-orders", (req: Request, res: Response) => {
   getOrdersByStatus(req, res, "ORDER_PREPARED");
 });
-app.get("/owner/get-picked-orders", (req: Request, res: Response) => {
+app.post("/owner/get-picked-orders", (req: Request, res: Response) => {
   getOrdersByStatus(req, res, "ORDER_PICKED");
 });
 app.post("/owner/get-all-orders", (req: Request, res: Response) => {
