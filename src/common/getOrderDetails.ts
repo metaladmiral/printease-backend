@@ -10,7 +10,7 @@ async function getOrderDetails(req: RequestWithUser, res: Response) {
   const order_id = req.query.order_id.toString();
 
   try {
-    const orderDetails = OrderDbService.getOrderDetails(order_id);
+    const orderDetails = await OrderDbService.getOrderDetails(order_id);
     return res.send(orderDetails);
   } catch (err) {
     return res.send("DB error");
