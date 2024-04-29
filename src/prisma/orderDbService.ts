@@ -15,8 +15,8 @@ const OrderDbService = {
             order_id: orderObject.orderId,
             user_id: orderObject.userId,
             order_title: orderObject.title,
-            payment_id: orderObject.paymentId,
-            status: 0,
+            payment_id: null,
+            status: -1,
             total_price: orderObject.totalPriceFloat,
             updatedAt: new Date(),
           },
@@ -116,6 +116,29 @@ const OrderDbService = {
           status: parsedOrderStatus,
         },
       });
+    } catch (err) {
+      throw err;
+    } finally {
+      prisma.$disconnect;
+    }
+  },
+  updateOrderPaymentId: async (
+    userId: string,
+    orderId: string,
+    paymentId: string
+  ) => {
+    try {
+      await prisma.order.update({
+        where: {
+          user_id: userId,
+          order_id: orderId,
+        },
+        data: {
+          payment_id: paymentId,
+          status: 0,
+        },
+      });
+      return 1;
     } catch (err) {
       throw err;
     } finally {

@@ -12,6 +12,7 @@ import {
   getUserDetails,
   getPerPagePrice,
   sendEmail,
+  updateOrderPaymentId,
 } from "./controller";
 import {
   jwtMiddleware,
@@ -64,6 +65,9 @@ app.post(
 
 app.get("/user/my-orders", (req: Request, res: Response) => {
   getMyOrders(req, res);
+});
+app.post("/user/update-order-payment-id", (req: Request, res: Response) => {
+  updateOrderPaymentId(req, res);
 });
 
 /* Owner APIs */

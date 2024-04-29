@@ -49,7 +49,6 @@ async function createOrder(req: RequestWithUser, res: Response) {
     orderId,
     userId,
     title,
-    paymentId,
     totalPriceFloat: parseFloat(totalPrice),
   };
 

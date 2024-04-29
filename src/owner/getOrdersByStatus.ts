@@ -17,17 +17,18 @@ async function getOrdersByStatus(
 
   try {
     let statusNum;
-    if (orderStatus == "ORDER_PENDING") {
+    if (orderStatus === "ORDER_PENDING") {
       statusNum = 0;
     }
-    if (orderStatus == "ORDER_PREPARED") {
+    if (orderStatus === "ORDER_PREPARED") {
       statusNum = 1;
     }
-    if (orderStatus == "ORDER_PICKED") {
+    if (orderStatus === "ORDER_PICKED") {
       statusNum = 2;
     }
 
-    const whereObj: OrderDbWhereObj = { status: statusNum };
+    let whereObj: OrderDbWhereObj = { status: statusNum };
+
     const orderDetails = await OrderDbService.getOrders(
       whereObj,
       undefined,

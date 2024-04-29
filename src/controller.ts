@@ -9,6 +9,7 @@ import updateOrderStatus from "./owner/updateOrderStatus";
 import getUserDetails from "./common/getUserDetails";
 import getPerPagePrice from "./common/getPerPagePrice";
 import sendEmail from "./mail/sendEmail";
+import updateOrderPaymentId from "./user/updateOrderPaymentId";
 
 export {
   login,
@@ -22,4 +23,5 @@ export {
   getUserDetails,
   getPerPagePrice,
   sendEmail,
+  updateOrderPaymentId,
 };

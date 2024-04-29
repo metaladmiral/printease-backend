@@ -10,7 +10,6 @@ export interface Order {
   orderId: string;
   userId: string;
   title: string;
-  paymentId: string;
   totalPriceFloat: number;
   status?: number;
 }
