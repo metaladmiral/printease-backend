@@ -41,8 +41,9 @@ async function createOrder(req: RequestWithUser, res: Response) {
     return;
   }
 
-  let orderId = crypto.randomBytes(20).toString("hex");
-  let userId = req.user.userId;
+  const orderId = crypto.randomBytes(20).toString("hex");
+  const user = req.user;
+  const userId = user?.user_id;
 
   let orderObject: Order = {
     orderId,
@@ -66,7 +67,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     await OrderDbService.createOrder(orderObject, orderDetailObject);
     res.json({ success: "true" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send({ success: "false", msg: `DB Error` });
     return;
   }
