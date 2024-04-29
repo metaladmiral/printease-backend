@@ -19,6 +19,7 @@ import {
   uploadMiddleware,
   ownerMiddleware,
 } from "./middleware/middlewares";
+import cors from "cors";
 
 enva.config();
 
@@ -29,6 +30,7 @@ app.use(
   })
 );
 
+app.use("/", cors());
 app.use(
   "/user",
   jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
