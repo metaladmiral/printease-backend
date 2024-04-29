@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { OrderDbOrderByObj, RequestWithUser } from "../types";
+import { OrderDbOrderByObj, OrderDbWhereObj, RequestWithUser } from "../types";
 import OrderDbService from "../prisma/orderDbService";
 
 async function getAllOrders(req: RequestWithUser, res: Response) {
@@ -11,10 +11,12 @@ async function getAllOrders(req: RequestWithUser, res: Response) {
   const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
   const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
+  const whereObj: OrderDbWhereObj = { NOT: { status: -1 } };
+  const orderByObj: OrderDbOrderByObj = { updatedAt: "desc" };
+
   try {
-    const orderByObj: OrderDbOrderByObj = { updatedAt: "desc" };
     const orderDetails = await OrderDbService.getOrders(
-      undefined,
+      whereObj,
       orderByObj,
       limit,
       offset

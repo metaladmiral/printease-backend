@@ -27,6 +27,7 @@ export interface OrderDetail {
 export interface OrderDbWhereObj {
   user_id?: string;
   status?: number;
+  NOT?: object;
 }
 export interface OrderDbOrderByObj {
   status?: "asc" | "desc";
