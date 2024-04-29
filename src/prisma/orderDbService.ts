@@ -9,7 +9,7 @@ import prisma from "./prisma";
 const OrderDbService = {
   createOrder: async (orderObject: Order, orderDetailObject: OrderDetail) => {
     try {
-      await prisma.$transaction([
+      const [newOrderSummary, newOrderDetails] = await prisma.$transaction([
         prisma.order.create({
           data: {
             order_id: orderObject.orderId,
@@ -34,6 +34,7 @@ const OrderDbService = {
           },
         }),
       ]);
+      return { orderSummary: newOrderSummary, orderDetails: newOrderDetails };
     } catch (err) {
       throw err;
     } finally {

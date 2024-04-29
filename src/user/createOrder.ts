@@ -63,8 +63,18 @@ async function createOrder(req: RequestWithUser, res: Response) {
   };
 
   try {
-    await OrderDbService.createOrder(orderObject, orderDetailObject);
-    res.json({ success: "true" });
+    const newOrder = await OrderDbService.createOrder(
+      orderObject,
+      orderDetailObject
+    );
+
+    res.json({
+      success: "true",
+      data: {
+        orderSummary: newOrder.orderSummary,
+        orderDetails: newOrder.orderDetails,
+      },
+    });
   } catch (err) {
     // console.log(err);
     res.status(500).send({ success: "false", msg: `DB Error` });
