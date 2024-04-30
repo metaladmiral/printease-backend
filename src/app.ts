@@ -65,7 +65,7 @@ app.post(
   }
 );
 
-app.get("/user/my-orders", (req: Request, res: Response) => {
+app.post("/user/my-orders", (req: Request, res: Response) => {
   getMyOrders(req, res);
 });
 app.post("/user/update-order-payment-id", (req: Request, res: Response) => {

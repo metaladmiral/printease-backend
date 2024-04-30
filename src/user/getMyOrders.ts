@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { OrderDbWhereObj, RequestWithUser } from "../types";
+import { OrderDbOrderByObj, OrderDbWhereObj, RequestWithUser } from "../types";
 import OrderDbService from "../prisma/orderDbService";
 
 async function getMyOrders(req: RequestWithUser, res: Response) {
@@ -8,11 +8,20 @@ async function getMyOrders(req: RequestWithUser, res: Response) {
     return;
   }
 
-  let userId: string = req.user.user_id;
+  const userId: string = req.user.user_id;
+
+  const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
+  const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
   try {
     const whereObj: OrderDbWhereObj = { user_id: userId };
-    const orders = await OrderDbService.getOrders(whereObj, { status: "asc" });
+    const orderByObj: OrderDbOrderByObj = { status: "asc" };
+    const orders = await OrderDbService.getOrders(
+      whereObj,
+      orderByObj,
+      limit,
+      offset
+    );
     return res.send(orders);
   } catch (err) {
     return res.send("DB ERROR");
