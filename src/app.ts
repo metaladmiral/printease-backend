@@ -67,9 +67,6 @@ app.post("/user/update-order-payment-id", (req: Request, res: Response) => {
 });
 
 /* Owner APIs */
-app.post("/owner/get-all-orders", (req: Request, res: Response) => {
-  getAllOrders(req, res);
-});
 app.post("/owner/update-order-status", (req: Request, res: Response) => {
   updateOrderStatus(req, res);
 });
@@ -97,6 +94,9 @@ app.post("/common/get-prepared-orders", (req: Request, res: Response) => {
 });
 app.post("/common/get-picked-orders", (req: Request, res: Response) => {
   getOrders(req, res, "ORDER_PICKED");
+});
+app.post("/common/get-all-orders", (req: Request, res: Response) => {
+  getAllOrders(req, res);
 });
 
 export default app;

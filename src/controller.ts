@@ -3,7 +3,7 @@ import register from "./auth/register";
 import createOrder from "./user/createOrder";
 import getOrderDetails from "./common/getOrderDetails";
 import getOrders from "./common/getOrders";
-import getAllOrders from "./owner/getAllOrders";
+import getAllOrders from "./common/getAllOrders";
 import updateOrderStatus from "./owner/updateOrderStatus";
 import getUserDetails from "./common/getUserDetails";
 import getPerPagePrice from "./common/getPerPagePrice";
