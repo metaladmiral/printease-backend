@@ -22,7 +22,7 @@ async function getOrders(
 
   let whereObj: OrderDbWhereObj = { status: statusNum };
 
-  if (req.user.user_type === 1) {
+  if (req.user.user_type == 1) {
     whereObj.user_id = req.user.user_id;
   }
 
