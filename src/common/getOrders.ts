@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { OrderDbWhereObj, OrderStatus, RequestWithUser } from "../types";
 import OrderDbService from "../prisma/orderDbService";
+import { UserTypes } from "../constants";
 
 async function getOrders(
   req: RequestWithUser,
@@ -22,7 +23,7 @@ async function getOrders(
 
   let whereObj: OrderDbWhereObj = { status: statusNum };
 
-  if (req.user.user_type == 1) {
+  if (req.user.user_type == UserTypes.USER) {
     whereObj.user_id = req.user.user_id;
   }
 
