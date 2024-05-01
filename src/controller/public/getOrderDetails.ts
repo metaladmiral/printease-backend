@@ -1,6 +1,6 @@
 import { Response } from "express";
-import { RequestWithUser } from "../types";
-import OrderDbService from "../prisma/orderDbService";
+import { RequestWithUser } from "../../types";
+import OrderDbService from "../../prisma/orderDbService";
 
 async function getOrderDetails(req: RequestWithUser, res: Response) {
   if (req.query.order_id === undefined) {

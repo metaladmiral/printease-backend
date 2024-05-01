@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import jwt, { Secret } from "jsonwebtoken";
-import UserDbService from "../prisma/userDbService";
+import UserDbService from "../../prisma/userDbService";
 
 async function login(req: Request, res: Response, TOKEN_SECRET: Secret) {
   const { email, pass } = req.body;

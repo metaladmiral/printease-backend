@@ -1,6 +1,6 @@
 import { Response } from "express";
-import { RequestWithUser } from "../types";
-import OrderDbService from "../prisma/orderDbService";
+import { RequestWithUser } from "../../types";
+import OrderDbService from "../../prisma/orderDbService";
 
 async function updateOrderStatus(req: RequestWithUser, res: Response) {
   let { order_id: orderId, order_status } = req.body;

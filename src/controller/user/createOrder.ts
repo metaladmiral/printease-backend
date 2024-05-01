@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { OrderDetail, RequestWithUser } from "../types";
+import { OrderDetail, RequestWithUser } from "../../types";
 import { JwtPayload } from "jsonwebtoken";
-import OrderDbService from "../prisma/orderDbService";
-import { Order } from "../types";
+import OrderDbService from "../../prisma/orderDbService";
+import { Order } from "../../types";
 
 var crypto = require("crypto");
 

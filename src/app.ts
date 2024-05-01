@@ -12,7 +12,7 @@ import {
   getPerPagePrice,
   sendEmail,
   updateOrderPaymentId,
-} from "./controller";
+} from "./controller/controller";
 import {
   jwtMiddleware,
   uploadMiddleware,

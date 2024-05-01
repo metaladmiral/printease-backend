@@ -1,4 +1,4 @@
-import { RequestWithUser } from "../types";
+import { RequestWithUser } from "../../types";
 import EmailService from "./emailService";
 import { Response } from "express";
 
@@ -52,8 +52,8 @@ async function sendEmail(req: RequestWithUser, res: Response) {
                     <li><strong>Total Cost:</strong> ${
                       req.body.totalpages
                     } * Rs. ${req.body.priceperpage} = ${
-        req.body.totalpages * req.body.priceperpage
-      }</li>
+                      req.body.totalpages * req.body.priceperpage
+                    }</li>
                   </ul>
                 </div>
               </div>`,

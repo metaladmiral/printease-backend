@@ -1,7 +1,7 @@
 import { Response } from "express";
-import { OrderDbWhereObj, OrderStatus, RequestWithUser } from "../types";
-import OrderDbService from "../prisma/orderDbService";
-import { UserTypes } from "../constants";
+import { OrderDbWhereObj, OrderStatus, RequestWithUser } from "../../types";
+import OrderDbService from "../../prisma/orderDbService";
+import { UserTypes } from "../../constants";
 
 async function getOrders(
   req: RequestWithUser,

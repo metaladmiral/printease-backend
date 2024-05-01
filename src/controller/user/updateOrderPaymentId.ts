@@ -1,6 +1,6 @@
 import { Response } from "express";
-import { OrderDbWhereObj, RequestWithUser } from "../types";
-import OrderDbService from "../prisma/orderDbService";
+import { OrderDbWhereObj, RequestWithUser } from "../../types";
+import OrderDbService from "../../prisma/orderDbService";
 
 async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
   if (req.user === undefined) {

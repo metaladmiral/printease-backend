@@ -1,7 +1,11 @@
 import { Response } from "express";
-import { OrderDbOrderByObj, OrderDbWhereObj, RequestWithUser } from "../types";
-import OrderDbService from "../prisma/orderDbService";
-import { UserTypes } from "../constants";
+import {
+  OrderDbOrderByObj,
+  OrderDbWhereObj,
+  RequestWithUser,
+} from "../../types";
+import OrderDbService from "../../prisma/orderDbService";
+import { UserTypes } from "../../constants";
 
 async function getAllOrders(req: RequestWithUser, res: Response) {
   if (req.user === undefined) {
