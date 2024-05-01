@@ -4,9 +4,8 @@ import {
   login,
   register,
   createOrder,
-  getMyOrders,
   getOrderDetails,
-  getOrdersByStatus,
+  getOrders,
   updateOrderStatus,
   getAllOrders,
   getUserDetails,
@@ -56,7 +55,6 @@ app.post("/register", (req: Request, res: Response) => {
 });
 
 /* User APIs */
-
 app.post(
   "/user/create-order",
   uploadMiddleware(),
@@ -64,24 +62,11 @@ app.post(
     createOrder(req, res);
   }
 );
-
-app.post("/user/my-orders", (req: Request, res: Response) => {
-  getMyOrders(req, res);
-});
 app.post("/user/update-order-payment-id", (req: Request, res: Response) => {
   updateOrderPaymentId(req, res);
 });
 
 /* Owner APIs */
-app.post("/owner/get-pending-orders", (req: Request, res: Response) => {
-  getOrdersByStatus(req, res, "ORDER_PENDING");
-});
-app.post("/owner/get-prepared-orders", (req: Request, res: Response) => {
-  getOrdersByStatus(req, res, "ORDER_PREPARED");
-});
-app.post("/owner/get-picked-orders", (req: Request, res: Response) => {
-  getOrdersByStatus(req, res, "ORDER_PICKED");
-});
 app.post("/owner/get-all-orders", (req: Request, res: Response) => {
   getAllOrders(req, res);
 });
@@ -103,6 +88,15 @@ app.get("/get-order-details", (req: Request, res: Response) => {
 /* Common APis (Requires JWT for either owner or user) */
 app.get("/common/get-user-details", (req: Request, res: Response) => {
   getUserDetails(req, res);
+});
+app.post("/common/get-pending-orders", (req: Request, res: Response) => {
+  getOrders(req, res, "ORDER_PENDING");
+});
+app.post("/common/get-prepared-orders", (req: Request, res: Response) => {
+  getOrders(req, res, "ORDER_PREPARED");
+});
+app.post("/common/get-picked-orders", (req: Request, res: Response) => {
+  getOrders(req, res, "ORDER_PICKED");
 });
 
 export default app;

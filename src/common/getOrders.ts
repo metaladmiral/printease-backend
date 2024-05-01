@@ -2,7 +2,7 @@ import { Response } from "express";
 import { OrderDbWhereObj, OrderStatus, RequestWithUser } from "../types";
 import OrderDbService from "../prisma/orderDbService";
 
-async function getOrdersByStatus(
+async function getOrders(
   req: RequestWithUser,
   res: Response,
   orderStatus: OrderStatus
@@ -15,20 +15,18 @@ async function getOrdersByStatus(
   const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
   const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
+  let statusNum;
+  if (orderStatus === "ORDER_PENDING") statusNum = 0;
+  if (orderStatus === "ORDER_PREPARED") statusNum = 1;
+  if (orderStatus === "ORDER_PICKED") statusNum = 2;
+
+  let whereObj: OrderDbWhereObj = { status: statusNum };
+
+  if (req.user.user_type === 1) {
+    whereObj.user_id = req.user.user_id;
+  }
+
   try {
-    let statusNum;
-    if (orderStatus === "ORDER_PENDING") {
-      statusNum = 0;
-    }
-    if (orderStatus === "ORDER_PREPARED") {
-      statusNum = 1;
-    }
-    if (orderStatus === "ORDER_PICKED") {
-      statusNum = 2;
-    }
-
-    let whereObj: OrderDbWhereObj = { status: statusNum };
-
     const orderDetails = await OrderDbService.getOrders(
       whereObj,
       undefined,
@@ -41,4 +39,4 @@ async function getOrdersByStatus(
   }
 }
 
-export default getOrdersByStatus;
+export default getOrders;

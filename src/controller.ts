@@ -1,9 +1,8 @@
 import login from "./auth/login";
 import register from "./auth/register";
 import createOrder from "./user/createOrder";
-import getMyOrders from "./user/getMyOrders";
 import getOrderDetails from "./common/getOrderDetails";
-import getOrdersByStatus from "./owner/getOrdersByStatus";
+import getOrders from "./common/getOrders";
 import getAllOrders from "./owner/getAllOrders";
 import updateOrderStatus from "./owner/updateOrderStatus";
 import getUserDetails from "./common/getUserDetails";
@@ -15,9 +14,8 @@ export {
   login,
   register,
   createOrder,
-  getMyOrders,
   getOrderDetails,
-  getOrdersByStatus,
+  getOrders,
   getAllOrders,
   updateOrderStatus,
   getUserDetails,
