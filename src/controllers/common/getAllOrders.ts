@@ -20,7 +20,7 @@ async function getAllOrders(req: RequestWithUser, res: Response) {
   if (req.user.user_type == UserTypes.OWNER) whereObj.NOT = { status: -1 };
   if (req.user.user_type == UserTypes.USER) whereObj.user_id = req.user.user_id;
 
-  const orderByObj: OrderDbOrderByObj = { updatedAt: "desc" };
+  const orderByObj: OrderDbOrderByObj = { createdAt: "desc" };
 
   try {
     const orderDetails = await OrderDbService.getOrders(

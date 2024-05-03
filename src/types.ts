@@ -32,6 +32,7 @@ export interface OrderDbWhereObj {
 export interface OrderDbOrderByObj {
   status?: "asc" | "desc";
   updatedAt?: "asc" | "desc";
+  createdAt?: "asc" | "desc";
 }
 
 export type OrderStatus = "ORDER_PREPARED" | "ORDER_PICKED" | "ORDER_PENDING";
