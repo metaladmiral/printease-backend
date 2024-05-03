@@ -1,5 +1,11 @@
 import { Response } from "express";
-import { OrderDbWhereObj, OrderStatus, RequestWithUser } from "../../types";
+import {
+  Order,
+  OrderDbOrderByObj,
+  OrderDbWhereObj,
+  OrderStatus,
+  RequestWithUser,
+} from "../../types";
 import OrderDbService from "../../prisma/orderDbService";
 import { UserTypes } from "../../constants";
 
@@ -22,6 +28,7 @@ async function getOrders(
   if (orderStatus === "ORDER_PICKED") statusNum = 2;
 
   let whereObj: OrderDbWhereObj = { status: statusNum };
+  let orderObj: OrderDbOrderByObj = { createdAt: "desc" };
 
   if (req.user.user_type == UserTypes.USER) {
     whereObj.user_id = req.user.user_id;
@@ -30,7 +37,7 @@ async function getOrders(
   try {
     const orderDetails = await OrderDbService.getOrders(
       whereObj,
-      undefined,
+      orderObj,
       limit,
       offset
     );
