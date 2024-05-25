@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-app.use("/", cors());
+app.use(cors());
 app.use(
   "/user",
   jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
