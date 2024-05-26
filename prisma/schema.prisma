@@ -30,6 +30,7 @@ model User {
 model Order {
   id            Int         @id @default(autoincrement())
   order_id      String      @unique
+  token_id      Int         @default(autoincrement())
   user_id       String
   order_title   String
   payment_id    String?  
