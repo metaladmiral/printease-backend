@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "./prisma";
 
 const UserDbService = {
@@ -20,6 +21,14 @@ const UserDbService = {
         },
       });
     } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === "P2002") {
+          throw "User Already Exists!";
+        }
+      }
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Error Connecting to DB";
+      }
       throw err;
     } finally {
       prisma.$disconnect;

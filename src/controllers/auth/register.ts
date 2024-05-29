@@ -24,7 +24,7 @@ async function register(req: Request, res: Response) {
     );
     return res.status(201).json({ user });
   } catch (err) {
-    return res.status(500).json({ error: "Failed to register user" });
+    return res.status(500).json({ error: err });
   }
 }
 
