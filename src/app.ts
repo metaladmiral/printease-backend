@@ -12,6 +12,7 @@ import {
   getPerPagePrice,
   sendEmail,
   updateOrderPaymentId,
+  updateUserDetails,
 } from "./controllers/controller";
 import {
   jwtMiddleware,
@@ -97,6 +98,11 @@ app.post("/common/get-picked-orders", (req: Request, res: Response) => {
 });
 app.post("/common/get-all-orders", (req: Request, res: Response) => {
   getAllOrders(req, res);
+});
+
+/* Admin APIs */
+app.post("/admin/update-user-details", (req: Request, res: Response) => {
+  updateUserDetails(req, res);
 });
 
 export default app;

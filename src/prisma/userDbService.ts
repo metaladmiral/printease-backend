@@ -40,6 +40,24 @@ const UserDbService = {
       prisma.$disconnect;
     }
   },
+
+  updateUser: async (userId: string, pushTokens: string) => {
+    try {
+      await prisma.user.update({
+        where: {
+          user_id: userId,
+        },
+        data: {
+          push_token: pushTokens,
+        },
+      });
+      return 1;
+    } catch (err) {
+      throw err;
+    } finally {
+      prisma.$disconnect;
+    }
+  },
 };
 
 export default UserDbService;
