@@ -9,7 +9,7 @@ const UserDbService = {
     userId: string
   ) => {
     try {
-      await prisma.user.create({
+      return await prisma.user.create({
         data: {
           username: username,
           email: email,
