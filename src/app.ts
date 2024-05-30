@@ -7,7 +7,6 @@ import {
   getOrderDetails,
   getOrders,
   updateOrderStatus,
-  getAllOrders,
   getUserDetails,
   getPerPagePrice,
   sendEmail,
