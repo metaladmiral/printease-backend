@@ -1,18 +1,17 @@
 import { Response } from "express";
 import {
-  Order,
   OrderDbOrderByObj,
   OrderDbWhereObj,
   OrderStatus,
   RequestWithUser,
 } from "../../types";
 import OrderDbService from "../../prisma/orderDbService";
-import { UserTypes } from "../../constants";
+import { UserTypes, OrderStatusNum } from "../../constants";
 
 async function getOrders(
   req: RequestWithUser,
   res: Response,
-  orderStatus: OrderStatus
+  orderStatus: OrderStatus = null
 ) {
   if (req.user === undefined) {
     res.status(403).send("Access Forbidden");
@@ -22,16 +21,26 @@ async function getOrders(
   const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
   const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
-  let statusNum;
-  if (orderStatus === "ORDER_PENDING") statusNum = 0;
-  if (orderStatus === "ORDER_PREPARED") statusNum = 1;
-  if (orderStatus === "ORDER_PICKED") statusNum = 2;
-
-  let whereObj: OrderDbWhereObj = { status: statusNum };
   let orderObj: OrderDbOrderByObj = { createdAt: "desc" };
+  let whereObj: OrderDbWhereObj = {};
 
-  if (req.user.user_type == UserTypes.USER) {
-    whereObj.user_id = req.user.user_id;
+  //only show orders to owner which have successful payments
+  if (req.user.user_type == UserTypes.OWNER)
+    whereObj.NOT = { status: OrderStatusNum.ORDER_PAYMENT_PENDING };
+
+  // only show orders of the user only
+  if (req.user.user_type == UserTypes.USER) whereObj.user_id = req.user.user_id;
+
+  if (orderStatus) {
+    let statusNum;
+
+    if (orderStatus === "ORDER_PENDING")
+      statusNum = OrderStatusNum.ORDER_PENDING;
+    if (orderStatus === "ORDER_PREPARED")
+      statusNum = OrderStatusNum.ORDER_PREPARED;
+    if (orderStatus === "ORDER_PICKED") statusNum = OrderStatusNum.ORDER_PICKED;
+
+    whereObj.status = statusNum;
   }
 
   try {
