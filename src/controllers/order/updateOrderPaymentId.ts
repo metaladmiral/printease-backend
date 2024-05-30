@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { OrderDbWhereObj, RequestWithUser } from "../../types";
+import { RequestWithUser, UpdateOrder } from "../../types";
 import OrderDbService from "../../prisma/orderDbService";
 
 async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
@@ -22,10 +22,12 @@ async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
   paymentId = req.body.paymentid;
 
   try {
-    const reqStatus = await OrderDbService.updateOrderPaymentId(
-      userId,
-      orderId,
-      paymentId
+    const orderDataToUpdate: UpdateOrder = {
+      paymentId: paymentId,
+    };
+    const reqStatus = await OrderDbService.updateOrder(
+      orderDataToUpdate,
+      orderId
     );
     if (reqStatus) {
       return res.json({ success: true, msg: "Order Payment ID updated" });

@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import {
   Order,
   OrderDetail,
@@ -106,41 +107,19 @@ const OrderDbService = {
       prisma.$disconnect;
     }
   },
-
-  updateOrderStatus: async (orderId: string, parsedOrderStatus: number) => {
+  updateOrder: async (data: object, orderId: string) => {
     try {
       await prisma.order.update({
         where: {
           order_id: orderId,
         },
-        data: {
-          status: parsedOrderStatus,
-        },
-      });
-    } catch (err) {
-      throw err;
-    } finally {
-      prisma.$disconnect;
-    }
-  },
-  updateOrderPaymentId: async (
-    userId: string,
-    orderId: string,
-    paymentId: string
-  ) => {
-    try {
-      await prisma.order.update({
-        where: {
-          user_id: userId,
-          order_id: orderId,
-        },
-        data: {
-          payment_id: paymentId,
-          status: 0,
-        },
+        data: data,
       });
       return 1;
     } catch (err) {
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
       throw err;
     } finally {
       prisma.$disconnect;

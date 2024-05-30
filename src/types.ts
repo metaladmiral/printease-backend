@@ -12,6 +12,15 @@ export interface Order {
   title: string;
   totalPriceFloat: number;
   status?: number;
+  paymentId?: string;
+}
+export interface UpdateOrder {
+  orderId?: string;
+  userId?: string;
+  title?: string;
+  totalPriceFloat?: number;
+  status?: number;
+  paymentId?: string;
 }
 
 export interface OrderDetail {
