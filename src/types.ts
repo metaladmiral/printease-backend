@@ -35,4 +35,9 @@ export interface OrderDbOrderByObj {
   createdAt?: "asc" | "desc";
 }
 
-export type OrderStatus = "ORDER_PREPARED" | "ORDER_PICKED" | "ORDER_PENDING";
+export type OrderStatus =
+  | "ORDER_PAYMENT_PENDING"
+  | "ORDER_PREPARED"
+  | "ORDER_PICKED"
+  | "ORDER_PENDING"
+  | null;
