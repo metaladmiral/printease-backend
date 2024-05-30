@@ -23,7 +23,8 @@ async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
 
   try {
     const orderDataToUpdate: UpdateOrder = {
-      paymentId: paymentId,
+      payment_id: paymentId,
+      status: 0,
     };
     const reqStatus = await OrderDbService.updateOrder(
       orderDataToUpdate,
