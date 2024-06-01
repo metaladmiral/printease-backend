@@ -3,11 +3,15 @@ import crypto from "crypto";
 import jwt, { Secret } from "jsonwebtoken";
 import UserDbService from "../../prisma/userDbService";
 
-async function login(req: Request, res: Response, TOKEN_SECRET: Secret) {
+async function login(
+  req: Request,
+  res: Response,
+  JWT_TOKEN_SECRET: Secret | undefined
+) {
   const { email, pass } = req.body;
 
   if (!email || !pass) {
-    return res.status(400);
+    return res.status(400).send("Missing Data");
   }
   const hashedPass = crypto.createHash("sha256").update(pass).digest("hex");
 
@@ -24,7 +28,10 @@ async function login(req: Request, res: Response, TOKEN_SECRET: Secret) {
   }
 
   function generateAccessToken(userData: Object) {
-    return jwt.sign(userData, TOKEN_SECRET, { expiresIn: "2629800s" });
+    if (JWT_TOKEN_SECRET === undefined) {
+      return res.status(500).send("INTERNAL SERVER ERROR");
+    }
+    return jwt.sign(userData, JWT_TOKEN_SECRET, { expiresIn: "2629800s" });
   }
   let jwtToken = generateAccessToken(user);
   res.send({ user_found: "1", JWT_TOKEN: jwtToken, user_type: user.user_type });
