@@ -1,5 +1,9 @@
 # Printease-backend
 
+## Walkthrough Video
+
+[YouTube](https://youtu.be/ILdctlz-VvI)
+
 ## How to setup?
 
 - Setup all the environment vars in the .env file taking inspiration from the .env.example file
@@ -21,3 +25,10 @@ After that, do,
 **Shop-owner:** _Email_ - shop1@gmail.com, _Pass_ - test
 
 **Customer:** _Email_ - customertest@test.com, _Pass_ - test
+
+### Misc
+
+Frontend is deplyed here [Printease Web](https://print-ease.netlify.app)
+(Credits: [Aman Siddiqui](https://github.com/Aman-Sidd))
+
+Link for the frontend codebase - [PrintEase-UI](https://github.com/Aman-Sidd/PrintEase)
