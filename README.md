@@ -2,7 +2,9 @@
 
 ## Walkthrough Video
 
-[YouTube](https://youtu.be/ILdctlz-VvI)
+[![Video Title](http://img.youtube.com/vi/ILdctlz-VvI/0.jpg)](https://www.youtube.com/watch?v=ILdctlz-VvI)
+
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/ILdctlz-VvI)
 
 ## How to setup?
 
