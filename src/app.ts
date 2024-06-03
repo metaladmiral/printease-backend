@@ -102,5 +102,8 @@ app.post("/common/get-all-orders", (req: Request, res: Response) => {
 app.post("/admin/update-user-details", (req: Request, res: Response) => {
   updateUserDetails(req, res);
 });
+app.get("/admin/get-user-details", (req: Request, res: Response) => {
+  getUserDetails(req, res, true);
+});
 
 export default app;
