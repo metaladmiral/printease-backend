@@ -1,5 +1,11 @@
 # Printease-backend
 
+## Introduction
+
+This is the backend server for a SaaS application called Printease, which solves a real-world problem and saves time of students. Printease can be used by print shop owners who have their shops near the universities to accept online ordering of printouts seamlessly. It also helps students save time by removing the burden on them to wait for their turn to get their printouts in case of going physically to the shop.
+
+(**Note**: **There are no logistics involved. Students have to get to the shop physically to get their printouts without waiting in the queue**)
+
 ## Walkthrough Video
 
 [![Video Title](http://img.youtube.com/vi/ILdctlz-VvI/0.jpg)](https://www.youtube.com/watch?v=ILdctlz-VvI)
