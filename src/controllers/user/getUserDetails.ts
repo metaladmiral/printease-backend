@@ -1,5 +1,4 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { RequestWithUser } from "../../types";
 import UserDbService from "../../prisma/userDbService";
 
@@ -13,7 +12,11 @@ async function getUserDetails(
       res.status(403).send("Access Forbidden!");
       return;
     }
-    return res.send(req.user);
+    const userDetailsWithoutPushTokens = (({
+      push_token,
+      ...restUserDetails
+    }) => restUserDetails)(req.user); // remove b and c
+    return res.send(userDetailsWithoutPushTokens);
   }
 
   if (!req.query.userid) {
