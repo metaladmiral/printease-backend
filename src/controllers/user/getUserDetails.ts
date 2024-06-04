@@ -15,7 +15,7 @@ async function getUserDetails(
     const userDetailsWithoutPushTokens = (({
       push_token,
       ...restUserDetails
-    }) => restUserDetails)(req.user); // remove b and c
+    }) => restUserDetails)(req.user); // exclude push tokens from upcoming response userDetails object
     return res.send(userDetailsWithoutPushTokens);
   }
 
