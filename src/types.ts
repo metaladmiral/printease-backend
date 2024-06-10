@@ -28,6 +28,7 @@ export interface OrderDetail {
   printType: string;
   totalPages: number;
   pricePerPage: number;
+  spiralBinding: boolean;
 }
 
 export interface OrderDbWhereObj {

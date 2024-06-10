@@ -17,6 +17,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     paymentid: paymentId,
     priceperpage: pricePerPage,
     shopid: shopId,
+    spiralbinding: spiralBinding,
   } = req.body;
 
   if (
@@ -26,7 +27,8 @@ async function createOrder(req: RequestWithUser, res: Response) {
     !totalPages ||
     !paymentId ||
     !pricePerPage ||
-    !shopId
+    !shopId ||
+    !spiralBinding
   ) {
     return res.send({
       success: "false",
@@ -43,6 +45,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     return;
   }
 
+  const spiralBindingBool: boolean = spiralBinding === "true";
   const orderId = crypto.randomBytes(20).toString("hex");
   const user = req.user;
   const userId = user?.user_id;
@@ -64,6 +67,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     printType: printType,
     totalPages: parseInt(totalPages),
     pricePerPage: parseFloat(pricePerPage),
+    spiralBinding: spiralBindingBool,
   };
 
   try {

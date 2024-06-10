@@ -33,6 +33,7 @@ const OrderDbService = {
             print_type: orderDetailObject.printType,
             total_pages: orderDetailObject.totalPages,
             price_per_page: orderDetailObject.pricePerPage,
+            spiral_binding: orderDetailObject.spiralBinding,
           },
         }),
       ]);

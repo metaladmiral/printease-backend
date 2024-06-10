@@ -51,7 +51,7 @@ model Order {
   total_price  Float
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  Shop         Shop         @relation(fields: [shop_id], references: [shop_id])
+  Shop         Shop          @relation(fields: [shop_id], references: [shop_id])
   User         User          @relation(fields: [user_id], references: [user_id])
   OrderDetails OrderDetail[]
 
@@ -60,7 +60,7 @@ model Order {
 
 // OrderDetails model
 model OrderDetail {
-  id             Int    @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   order_id       String
   file_details   Json
   page_size      String
@@ -68,5 +68,6 @@ model OrderDetail {
   print_type     String
   total_pages    Int
   price_per_page Float?
-  order          Order  @relation(fields: [order_id], references: [order_id]) // Define relation to Order
+  spiral_binding Boolean
+  order          Order   @relation(fields: [order_id], references: [order_id]) // Define relation to Order
 }
