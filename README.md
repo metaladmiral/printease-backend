@@ -6,11 +6,7 @@ This is the backend server for a SaaS application called Printease, which solves
 
 (**Note**: **There are no logistics involved. Students have to get to the shop physically to get their printouts without waiting in the queue**)
 
-## Walkthrough Video
-
-[![Video Title](http://img.youtube.com/vi/ILdctlz-VvI/0.jpg)](https://www.youtube.com/watch?v=ILdctlz-VvI)
-
-[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/ILdctlz-VvI)
+[More Details](https://printease-official.onrender.com/)
 
 ## How to setup?
 
