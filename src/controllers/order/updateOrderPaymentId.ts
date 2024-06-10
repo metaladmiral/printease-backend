@@ -38,7 +38,7 @@ async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
         .json({ success: false, msg: "Some Unknown Error" });
     }
   } catch (err) {
-    return res.status(500).json({ success: false, msg: "DB ERROR" });
+    return res.status(500).json({ success: false, msg: err });
   }
 }
 

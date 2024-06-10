@@ -38,7 +38,10 @@ const OrderDbService = {
       ]);
       return { orderSummary: newOrderSummary, orderDetails: newOrderDetails };
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
@@ -73,7 +76,10 @@ const OrderDbService = {
       });
       return orders;
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
@@ -99,7 +105,10 @@ const OrderDbService = {
         },
       });
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
@@ -117,7 +126,7 @@ const OrderDbService = {
       if (err instanceof Prisma.PrismaClientInitializationError) {
         throw "Cannot connect to DB!";
       }
-      throw err;
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }

@@ -80,8 +80,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
       },
     });
   } catch (err) {
-    res.status(500).send({ success: "false", msg: `DB Error` });
-    return;
+    return res.status(500).send({ success: "false", msg: err });
   }
 }
 

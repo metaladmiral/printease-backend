@@ -63,7 +63,7 @@ async function getOrders(
     );
     return res.send(orderDetails);
   } catch (err) {
-    return res.send("DB Error");
+    return res.status(500).send({ success: "false", msg: err });
   }
 }
 

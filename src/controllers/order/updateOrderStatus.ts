@@ -32,12 +32,12 @@ async function updateOrderStatus(req: RequestWithUser, res: Response) {
       orderId
     );
     if (resStatus == 1) {
-      res.send({ success: true, msg: "Updated Status of the order." });
+      return res.send({ success: true, msg: "Updated Status of the order." });
     } else {
-      res.send({ success: false, msg: "Error running the query!" });
+      return res.send({ success: false, msg: "Error running the query!" });
     }
   } catch (err) {
-    res.status(500).send({ success: false, msg: err });
+    return res.status(500).send({ success: false, msg: err });
   }
 }
 
