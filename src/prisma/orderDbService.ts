@@ -14,6 +14,7 @@ const OrderDbService = {
         prisma.order.create({
           data: {
             order_id: orderObject.orderId,
+            shop_id: orderObject.shopId,
             user_id: orderObject.userId,
             order_title: orderObject.title,
             payment_id: null,
@@ -53,10 +54,6 @@ const OrderDbService = {
 
     if (orderByObj === undefined) {
       orderByObj = {};
-    }
-
-    if (whereObj === undefined) {
-      whereObj = {};
     }
 
     if (limit === undefined) {

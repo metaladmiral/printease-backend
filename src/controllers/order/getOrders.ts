@@ -18,11 +18,22 @@ async function getOrders(
     return;
   }
 
+  if (!req.query.shop_id) {
+    res.status(422).send("shop_id query string param is required!");
+    return;
+  }
+
+  const shopId = parseInt(req.query.shop_id as string);
+  if (isNaN(shopId)) {
+    return res.status(400);
+  }
   const limit = req.body.limit !== undefined ? parseInt(req.body.limit) : 10;
   const offset = req.body.offset !== undefined ? parseInt(req.body.offset) : 0;
 
   let orderObj: OrderDbOrderByObj = { createdAt: "desc" };
-  let whereObj: OrderDbWhereObj = {};
+  let whereObj: OrderDbWhereObj = {
+    shop_id: shopId,
+  };
 
   //only show orders to owner which have successful payments
   if (req.user.user_type == UserTypes.OWNER)

@@ -15,44 +15,58 @@ datasource defaultdb {
 
 // User model
 model User {
-  id        Int      @id @default(autoincrement())
-  user_id   String   @unique
-  username  String
-  pass      String
-  email     String   @unique
-  phone     String
-  user_type String
-  push_token String? 
-  createdAt DateTime @default(now())
-  Order     Order[]
+  id         Int      @id @default(autoincrement())
+  user_id    String   @unique
+  username   String
+  pass       String
+  email      String   @unique
+  phone      String
+  user_type  String
+  push_token String?
+  createdAt  DateTime @default(now())
+  Order      Order[]
+  Shops      Shop[]
+}
+
+// Shop model
+model Shop {
+  shop_id      Int     @id @default(autoincrement())
+  shop_name    String
+  shop_address String
+  shop_phone   String
+  user_id      String
+  User         User    @relation(fields: [user_id], references: [user_id])
+  Orders       Order[]
 }
 
 // Orders model
 model Order {
-  id            Int         @id @default(autoincrement())
-  order_id      String      @unique
-  user_id       String
-  order_title   String
-  payment_id    String?  
-  status        Int
-  total_price   Float
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  User          User        @relation(fields: [user_id], references: [user_id])
-  OrderDetails  OrderDetail[]
+  id           Int           @id @default(autoincrement())
+  order_id     String        @unique
+  user_id      String
+  shop_id      Int
+  order_title  String
+  payment_id   String?
+  status       Int
+  total_price  Float
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  Shop         Shop         @relation(fields: [shop_id], references: [shop_id])
+  User         User          @relation(fields: [user_id], references: [user_id])
+  OrderDetails OrderDetail[]
 
   @@index([status])
 }
 
 // OrderDetails model
 model OrderDetail {
-  id           Int       @id @default(autoincrement())
-  order_id     String
-  file_details Json
-  page_size    String
-  print_color        String
-  print_type   String
-  total_pages        Int
+  id             Int    @id @default(autoincrement())
+  order_id       String
+  file_details   Json
+  page_size      String
+  print_color    String
+  print_type     String
+  total_pages    Int
   price_per_page Float?
-  order        Order     @relation(fields: [order_id], references: [order_id]) // Define relation to Order
+  order          Order  @relation(fields: [order_id], references: [order_id]) // Define relation to Order
 }
