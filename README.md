@@ -9,14 +9,13 @@ Printease is a SaaS application designed to streamline the print ordering proces
 
 [More Details](https://printease-official.onrender.com/)
 
-
 ### Table of Contents 🗒️
-- [Introduction](https://github.com/metaladmiral/printease-backend#introduction)
-- [Features](https://github.com/metaladmiral/printease-backend#features-and-pages-)
-- [Tech Stack](https://github.com/metaladmiral/printease-backend#tech-stack-%EF%B8%8F)
-- [Project Setup Guide](https://github.com/metaladmiral/printease-backend#how-to-setup-)
-- [Credentials for Testing](https://github.com/metaladmiral/printease-backend#test-credentials-)
-- [Useful links and Credits](https://github.com/metaladmiral/printease-backend#useful-links--credits-)
+- [Introduction](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#introduction)
+- [Features](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#features-and-pages-)
+- [Tech Stack](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#tech-stack-%EF%B8%8F)
+- [Project Setup Guide](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#how-to-setup-)
+- [Credentials for Testing](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#test-credentials-)
+- [Useful links and Credits](https://github.com/metaladmiral/printease-backend?tab=readme-ov-file#useful-links--credits-)
 
 # Features and Pages 🌟
 
