@@ -9,14 +9,23 @@ Printease is a SaaS application designed to streamline the print ordering proces
 
 [More Details](https://printease-official.onrender.com/)
 
-## Features and Pages
+
+### Table of Contents 🗒️
+- [Introduction](https://github.com/metaladmiral/printease-backend#introduction)
+- [Features](https://github.com/metaladmiral/printease-backend#features-and-pages)
+- [Tech Stack](https://github.com/metaladmiral/printease-backend#tech-stack)
+- [Project Setup Guide](https://github.com/metaladmiral/printease-backend#how-to-setup)
+- [Credentials for Testing](https://github.com/metaladmiral/printease-backend#test-credentials)
+- [Useful links and Credits](https://github.com/metaladmiral/printease-backend#useful-links-&-credits)
+
+# Features and Pages 🌟
 
 #### Types of Pages (based on Types of Users 👨‍🦲)
 1. Common Pages
 2. Customer Pages
 3. Shop-Owner Pages
 
-### Common Pages
+## Common Pages
 
 > ***Login/Register Page***
 1. Secure and Fast
@@ -63,7 +72,7 @@ Printease is a SaaS application designed to streamline the print ordering proces
 
 [Photo to be uploaded here.]
 
-## Tech Stack? ⚛️
+## Tech Stack ⚛️
 
 ### Frontend
 1. React Native
