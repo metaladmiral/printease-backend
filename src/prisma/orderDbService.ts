@@ -95,6 +95,7 @@ const OrderDbService = {
         include: {
           OrderDetails: {
             select: {
+              spiral_binding: true,
               file_details: true,
               page_size: true,
               print_color: true,
