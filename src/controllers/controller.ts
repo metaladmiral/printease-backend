@@ -9,6 +9,8 @@ import getPerPagePrice from "./misc/getPerPagePrice";
 import sendEmail from "./mail/sendEmail";
 import updateOrderPaymentId from "./order/updateOrderPaymentId";
 import updateUserDetails from "./user/updateUserDetails";
+import getShops from "./shops/getShops";
+import getShopDetails from "./shops/getShopDetails";
 
 export {
   login,
@@ -22,4 +24,6 @@ export {
   sendEmail,
   updateOrderPaymentId,
   updateUserDetails,
+  getShops,
+  getShopDetails,
 };

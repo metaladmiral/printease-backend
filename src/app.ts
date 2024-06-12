@@ -12,6 +12,8 @@ import {
   sendEmail,
   updateOrderPaymentId,
   updateUserDetails,
+  getShopDetails,
+  getShops,
 } from "./controllers/controller";
 import {
   jwtMiddleware,
@@ -104,6 +106,12 @@ app.post("/admin/update-user-details", (req: Request, res: Response) => {
 });
 app.get("/admin/get-user-details", (req: Request, res: Response) => {
   getUserDetails(req, res, true);
+});
+app.get("/admin/get-all-shops", (req: Request, res: Response) => {
+  getShops(req, res);
+});
+app.get("/admin/get-shop-details", (req: Request, res: Response) => {
+  getShopDetails(req, res);
 });
 
 export default app;
