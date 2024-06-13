@@ -42,6 +42,13 @@ const UserDbService = {
           email: email,
           pass: hashedPass,
         },
+        include: {
+          Shops: {
+            select: {
+              shop_id: true,
+            },
+          },
+        },
       });
     } catch (err) {
       throw err;
