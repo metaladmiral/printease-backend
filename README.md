@@ -32,11 +32,14 @@ Printease is a SaaS application designed to streamline the print ordering proces
 
     (Removing the overhead caused by storing sessions on the server)
 
+   ![Login Page](https://github.com/metaladmiral/printease-backend/assets/107746968/3c5caa2d-69ac-412d-a80a-32a02e2c48a4)
+
+
 > ***Profile Page***
 1. View all your details here.
 2. Logout here.
 
-![Profile Page](https://github.com/metaladmiral/printease-backend/assets/107746968/e6b1514b-d77e-47a7-a129-c56c68e8a4f4)
+![Profile Page](https://github.com/metaladmiral/printease-backend/assets/107746968/42deef70-8c8a-499b-aa24-617bf093553f)
 
 
 ### Customer Pages
@@ -52,7 +55,8 @@ Printease is a SaaS application designed to streamline the print ordering proces
 2. Filter orders by status: ORDER PENDING, ORDER PREPARED/PRINTED, or ORDER PICKED.
 3. Pagination is enabled for long order lists.
 
-![Customers see their order history here](https://github.com/metaladmiral/printease-backend/assets/107746968/e04220c8-63f2-4b87-b8e4-30944fc70fad)
+![Customers see their order history here](https://github.com/metaladmiral/printease-backend/assets/107746968/9ba12027-fdad-4bb0-8dde-8d3a8e0dcb77)
+
 
 ### Shop-Owner Pages
 
@@ -63,13 +67,15 @@ Printease is a SaaS application designed to streamline the print ordering proces
 4. Pagination is enabled for long order lists.
 5. Click any order tile to change its status and notify the customer.
 
-![Shop-Owner Dashboard](https://github.com/metaladmiral/printease-backend/assets/107746968/ca8f3fa7-4d05-4b08-a806-b981465c571c)
+![Shop-Owner Dashboard](https://github.com/metaladmiral/printease-backend/assets/107746968/7c198cca-c0fe-4113-aac9-00543fd94d4c)
+
 
 > ***Update Order Status Page***
 
 1. Order Status can be changed on this page.
 
-[Photo to be uploaded here.]
+![Order Status Change Page](https://github.com/metaladmiral/printease-backend/assets/107746968/b24e08f0-dcd9-40c6-b478-41bcbad1c4ab)
+
 
 ## Tech Stack ⚛️
 
