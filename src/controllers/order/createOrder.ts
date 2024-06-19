@@ -16,6 +16,8 @@ async function createOrder(req: RequestWithUser, res: Response) {
     totalpages: totalPages,
     paymentid: paymentId,
     priceperpage: pricePerPage,
+    shopid: shopId,
+    spiralbinding: spiralBinding,
   } = req.body;
 
   if (
@@ -24,7 +26,9 @@ async function createOrder(req: RequestWithUser, res: Response) {
     !printType ||
     !totalPages ||
     !paymentId ||
-    !pricePerPage
+    !pricePerPage ||
+    !shopId ||
+    !spiralBinding
   ) {
     return res.send({
       success: "false",
@@ -41,15 +45,18 @@ async function createOrder(req: RequestWithUser, res: Response) {
     return;
   }
 
+  const spiralBindingBool: boolean = spiralBinding === "true";
   const orderId = crypto.randomBytes(20).toString("hex");
   const user = req.user;
   const userId = user?.user_id;
+  const shopIdInt = parseInt(shopId as string);
 
   let orderObject: Order = {
     orderId,
     userId,
     title,
     totalPriceFloat: parseFloat(totalPrice),
+    shopId: shopIdInt,
   };
 
   let orderDetailObject: OrderDetail = {
@@ -60,6 +67,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
     printType: printType,
     totalPages: parseInt(totalPages),
     pricePerPage: parseFloat(pricePerPage),
+    spiralBinding: spiralBindingBool,
   };
 
   try {
@@ -76,9 +84,7 @@ async function createOrder(req: RequestWithUser, res: Response) {
       },
     });
   } catch (err) {
-    // console.log(err);
-    res.status(500).send({ success: "false", msg: `DB Error` });
-    return;
+    return res.status(500).send({ success: "false", msg: err });
   }
 }
 

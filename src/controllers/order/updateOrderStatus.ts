@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { RequestWithUser } from "../../types";
+import { RequestWithUser, UpdateOrder } from "../../types";
 import OrderDbService from "../../prisma/orderDbService";
 
 async function updateOrderStatus(req: RequestWithUser, res: Response) {
@@ -24,10 +24,20 @@ async function updateOrderStatus(req: RequestWithUser, res: Response) {
   }
 
   try {
-    await OrderDbService.updateOrderStatus(orderId, parsedOrderStatus);
-    res.send({ success: true, msg: "Updated Status of the order." });
+    let orderDataToUpdate: UpdateOrder = {
+      status: parsedOrderStatus,
+    };
+    let resStatus = await OrderDbService.updateOrder(
+      orderDataToUpdate,
+      orderId
+    );
+    if (resStatus == 1) {
+      return res.send({ success: true, msg: "Updated Status of the order." });
+    } else {
+      return res.send({ success: false, msg: "Error running the query!" });
+    }
   } catch (err) {
-    res.send("DB Error");
+    return res.status(500).send({ success: false, msg: err });
   }
 }
 

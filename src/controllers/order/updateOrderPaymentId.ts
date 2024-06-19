@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { OrderDbWhereObj, RequestWithUser } from "../../types";
+import { RequestWithUser, UpdateOrder } from "../../types";
 import OrderDbService from "../../prisma/orderDbService";
 
 async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
@@ -22,10 +22,13 @@ async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
   paymentId = req.body.paymentid;
 
   try {
-    const reqStatus = await OrderDbService.updateOrderPaymentId(
-      userId,
-      orderId,
-      paymentId
+    const orderDataToUpdate: UpdateOrder = {
+      payment_id: paymentId,
+      status: 0,
+    };
+    const reqStatus = await OrderDbService.updateOrder(
+      orderDataToUpdate,
+      orderId
     );
     if (reqStatus) {
       return res.json({ success: true, msg: "Order Payment ID updated" });
@@ -35,7 +38,7 @@ async function updateOrderPaymentId(req: RequestWithUser, res: Response) {
         .json({ success: false, msg: "Some Unknown Error" });
     }
   } catch (err) {
-    return res.status(500).json({ success: false, msg: "DB ERROR" });
+    return res.status(500).json({ success: false, msg: err });
   }
 }
 

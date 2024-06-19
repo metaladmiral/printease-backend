@@ -42,6 +42,13 @@ const UserDbService = {
           email: email,
           pass: hashedPass,
         },
+        include: {
+          Shops: {
+            select: {
+              shop_id: true,
+            },
+          },
+        },
       });
     } catch (err) {
       throw err;
@@ -50,6 +57,7 @@ const UserDbService = {
     }
   },
 
+  /* to be refactored and optimized */
   updateUser: async (userId: string, pushTokens: string) => {
     try {
       await prisma.user.update({
@@ -61,6 +69,21 @@ const UserDbService = {
         },
       });
       return 1;
+    } catch (err) {
+      throw err;
+    } finally {
+      prisma.$disconnect;
+    }
+  },
+
+  getUserDetails: async (userId: string) => {
+    try {
+      const userDetails = await prisma.user.findUnique({
+        where: {
+          user_id: userId,
+        },
+      });
+      return userDetails;
     } catch (err) {
       throw err;
     } finally {

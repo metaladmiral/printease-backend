@@ -5,7 +5,7 @@ export enum UserTypes {
 
 export enum OrderStatusNum {
   ORDER_PAYMENT_PENDING = -1,
-  ORDER_PREPARED = 0,
-  ORDER_PICKED = 1,
-  ORDER_PENDING = 2,
+  ORDER_PENDING = 0,
+  ORDER_PREPARED = 1,
+  ORDER_PICKED = 2,
 }

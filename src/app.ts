@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, response } from "express";
 import enva from "dotenv";
 import {
   login,
@@ -7,12 +7,13 @@ import {
   getOrderDetails,
   getOrders,
   updateOrderStatus,
-  getAllOrders,
   getUserDetails,
   getPerPagePrice,
   sendEmail,
   updateOrderPaymentId,
   updateUserDetails,
+  getShopDetails,
+  getShops,
 } from "./controllers/controller";
 import {
   jwtMiddleware,
@@ -30,26 +31,25 @@ app.use(
   })
 );
 
+if (!process.env.JWT_TOKEN_SECRET) {
+  response.status(500).send("Internal Server Error");
+  process.exit(1);
+}
+
 app.use(cors());
-app.use(
-  "/user",
-  jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
-);
-app.use(
-  "/common",
-  jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
-);
+app.use("/user", jwtMiddleware(process.env.JWT_TOKEN_SECRET));
+app.use("/common", jwtMiddleware(process.env.JWT_TOKEN_SECRET));
 app.use(
   "/owner",
-  jwtMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token"),
-  ownerMiddleware(process.env.JWT_TOKEN_SECRET || "Invalid Token")
+  jwtMiddleware(process.env.JWT_TOKEN_SECRET),
+  ownerMiddleware(process.env.JWT_TOKEN_SECRET)
 );
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 app.post("/login", (req: Request, res: Response) => {
-  login(req, res, process.env.JWT_TOKEN_SECRET || "12");
+  login(req, res, process.env.JWT_TOKEN_SECRET);
 });
 app.post("/register", (req: Request, res: Response) => {
   register(req, res);
@@ -103,6 +103,15 @@ app.post("/common/get-all-orders", (req: Request, res: Response) => {
 /* Admin APIs */
 app.post("/admin/update-user-details", (req: Request, res: Response) => {
   updateUserDetails(req, res);
+});
+app.get("/admin/get-user-details", (req: Request, res: Response) => {
+  getUserDetails(req, res, true);
+});
+app.get("/admin/get-all-shops", (req: Request, res: Response) => {
+  getShops(req, res);
+});
+app.get("/admin/get-shop-details", (req: Request, res: Response) => {
+  getShopDetails(req, res);
 });
 
 export default app;

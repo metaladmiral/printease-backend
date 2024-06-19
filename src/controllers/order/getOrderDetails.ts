@@ -13,7 +13,7 @@ async function getOrderDetails(req: RequestWithUser, res: Response) {
     const orderDetails = await OrderDbService.getOrderDetails(order_id);
     return res.send(orderDetails);
   } catch (err) {
-    return res.send("DB error");
+    return res.status(500).send({ success: "false", msg: err });
   }
 }
 

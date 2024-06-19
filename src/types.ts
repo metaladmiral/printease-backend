@@ -9,9 +9,15 @@ export interface RequestWithUser extends Request {
 export interface Order {
   orderId: string;
   userId: string;
+  shopId: number;
   title: string;
   totalPriceFloat: number;
   status?: number;
+  paymentId?: string;
+}
+export interface UpdateOrder {
+  status?: number;
+  payment_id?: string;
 }
 
 export interface OrderDetail {
@@ -22,12 +28,14 @@ export interface OrderDetail {
   printType: string;
   totalPages: number;
   pricePerPage: number;
+  spiralBinding: boolean;
 }
 
 export interface OrderDbWhereObj {
   user_id?: string;
   status?: number;
   NOT?: object;
+  shop_id: number;
 }
 export interface OrderDbOrderByObj {
   status?: "asc" | "desc";

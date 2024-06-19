@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import {
   Order,
   OrderDetail,
@@ -13,6 +14,7 @@ const OrderDbService = {
         prisma.order.create({
           data: {
             order_id: orderObject.orderId,
+            shop_id: orderObject.shopId,
             user_id: orderObject.userId,
             order_title: orderObject.title,
             payment_id: null,
@@ -31,12 +33,16 @@ const OrderDbService = {
             print_type: orderDetailObject.printType,
             total_pages: orderDetailObject.totalPages,
             price_per_page: orderDetailObject.pricePerPage,
+            spiral_binding: orderDetailObject.spiralBinding,
           },
         }),
       ]);
       return { orderSummary: newOrderSummary, orderDetails: newOrderDetails };
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
@@ -52,10 +58,6 @@ const OrderDbService = {
 
     if (orderByObj === undefined) {
       orderByObj = {};
-    }
-
-    if (whereObj === undefined) {
-      whereObj = {};
     }
 
     if (limit === undefined) {
@@ -75,7 +77,10 @@ const OrderDbService = {
       });
       return orders;
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
@@ -90,6 +95,7 @@ const OrderDbService = {
         include: {
           OrderDetails: {
             select: {
+              spiral_binding: true,
               file_details: true,
               page_size: true,
               print_color: true,
@@ -101,47 +107,28 @@ const OrderDbService = {
         },
       });
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
   },
-
-  updateOrderStatus: async (orderId: string, parsedOrderStatus: number) => {
+  updateOrder: async (data: object, orderId: string) => {
     try {
       await prisma.order.update({
         where: {
           order_id: orderId,
         },
-        data: {
-          status: parsedOrderStatus,
-        },
-      });
-    } catch (err) {
-      throw err;
-    } finally {
-      prisma.$disconnect;
-    }
-  },
-  updateOrderPaymentId: async (
-    userId: string,
-    orderId: string,
-    paymentId: string
-  ) => {
-    try {
-      await prisma.order.update({
-        where: {
-          user_id: userId,
-          order_id: orderId,
-        },
-        data: {
-          payment_id: paymentId,
-          status: 0,
-        },
+        data: data,
       });
       return 1;
     } catch (err) {
-      throw err;
+      if (err instanceof Prisma.PrismaClientInitializationError) {
+        throw "Cannot connect to DB!";
+      }
+      throw "Error in running the query!";
     } finally {
       prisma.$disconnect;
     }
