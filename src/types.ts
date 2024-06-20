@@ -49,3 +49,5 @@ export type OrderStatus =
   | "ORDER_PICKED"
   | "ORDER_PENDING"
   | null;
+
+export type RedisClientSourceType = "vercelkv" | "onserver";
