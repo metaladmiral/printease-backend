@@ -83,4 +83,5 @@ class RedisClient {
   }
 }
 
-export default RedisClient.getInstance();
+const redisClient = RedisClient.getInstance();
+export default redisClient;
