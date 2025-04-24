@@ -5,7 +5,7 @@
 Printease is a SaaS application designed to streamline the print ordering process for students and print shops near universities. It allows print shop owners to accept online print orders easily, reducing the need for students to wait in queue. With Printease, students can place print orders online and simply pick them up at the shop, saving time and avoiding queues.
 
 > [!NOTE]
-> **There are no logistics involved. Students have to get to the shop physically to get their printouts without waiting in the queue**
+> **There are no logistics involved. Students have to get to the shop physically to get the printouts without waiting in the queue**
 
 [More Details](https://printease-official.onrender.com/)
 
